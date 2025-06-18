@@ -1,0 +1,23 @@
+You are given an integer array nums of size n where n is a multiple of 3 and a positive integer k.
+Divide the array nums into n / 3 arrays of size 3 satisfying the following condition:
+The difference between any two elements in one array is less than or equal to k.
+Return a 2D array containing the arrays. If it is impossible to satisfy the conditions, return an empty array. And if there are multiple answers, return any of them.
+
+
+
+
+class Solution {
+  public int[][] divideArray(int[] nums, int k) {
+    int[][] ans = new int[nums.length / 3][3];
+
+    Arrays.sort(nums);
+
+    for (int i = 2; i < nums.length; i += 3) {
+      if (nums[i] - nums[i - 2] > k)
+        return new int[0][];
+      ans[i / 3] = new int[] {nums[i - 2], nums[i - 1], nums[i]};
+    }
+
+    return ans;
+  }
+}
